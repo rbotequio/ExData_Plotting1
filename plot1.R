@@ -21,8 +21,13 @@ library(data.table)
 library(dplyr)
 #Read DATA
 hpc <- read.table("household_power_consumption.txt", header = TRUE, sep = ";", na.strings = "?", dec = ".")
+
+#As date
 hpc$Date <- as.Date(hpc$Date, '%d/%m/%Y')
+#filter 01/02/2007 - 02/02/2007
 hpc1 <- filter(hpc, Date == "2007-02-01" | Date == "2007-02-02")
+
+#print Graph to PNG
 png(filename = "plot1.png")
 hist(hpc1$Global_active_power, col = "red", main = "Global Active Power", xlab = "Global Active Power(kilowatts)")
 dev.off()
